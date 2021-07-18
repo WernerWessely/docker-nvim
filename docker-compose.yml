@@ -1,0 +1,8 @@
+version: "3.9"
+services:
+  devenv:
+    container_name: devenv
+    build: .
+    volumes:
+      - ~/proj:/home/buildenv/proj
+    working_dir: /home/buildenv
