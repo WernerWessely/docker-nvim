@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.10
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM='xterm-256color'
@@ -16,7 +16,8 @@ RUN apt-get update && apt-get install -yq \
     git \
     fonts-firacode \
     locales \
-    fzf
+    fzf \
+    bat
 
 # Set locale:
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
