@@ -15,13 +15,17 @@ RUN apt-get update && apt-get install -yq \
     wget \
     git \
     fonts-firacode \
-    locales
+    locales \
+    fzf
 
 # Set locale:
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en
 ENV LC_ALL en_US.UTF-8
+
+COPY PKI-BR_ROOTCA.crt /usr/local/share/ca-certificates/PKI-BR_ROOTCA.crt
+RUN update-ca-certificates
 
 # Latest nvim:
 RUN add-apt-repository ppa:neovim-ppa/unstable \
@@ -50,6 +54,6 @@ RUN git clone https://github.com/WernerWessely/.dotfiles.git \
 # Zplug:
 ENV ZPLUG_HOME=/home/buildenv/.zplug
 RUN git clone https://github.com/zplug/zplug ${ZPLUG_HOME}
-RUN zsh -ic 'zplug install'
+# RUN zsh -ic 'zplug install'
 
 CMD tail -f /dev/null
